@@ -4,9 +4,11 @@ import {
   AsyncStorage,
   StatusBar,
   StyleSheet,
-  View,
+  View, Image
 } from 'react-native';
 import { styles } from '../../src/style/styles';
+import SplashScreen from 'react-native-splash-screen';
+
 
 export class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -14,6 +16,11 @@ export class AuthLoadingScreen extends React.Component {
     this._bootstrapAsync();
   }
 
+  componentDidMount() {
+        // do stuff while splash screen is shown
+        // After having done stuff (such as async tasks) hide the splash screen
+        SplashScreen.hide();
+    }
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
     
@@ -31,12 +38,13 @@ export class AuthLoadingScreen extends React.Component {
                 }
             }
       );
-            console.log(user);
     this.props.navigation.navigate( (user && user.authToken) ? 'App' : 'Auth');
+        
   };
 
   // Render any loading content that you like here
   render() {
+
     return (
       <View style={styles.container}>
         <ActivityIndicator />

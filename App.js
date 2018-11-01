@@ -8,14 +8,25 @@
 
 import React, {Component} from 'react';
 import { DrawerItems, SafeAreaView, AsyncStorage, AppRegistry, Text, View, Image, TextInput, Button, TouchableOpacity, StyleSheet} from 'react-native';
-import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator,createDrawerNavigator} from 'react-navigation';
+import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator,createDrawerNavigator,createMaterialTopTabNavigator } from 'react-navigation';
+import { Icon, SearchBar } from 'react-native-elements';
+import { YellowBox } from 'react-native';
+
 import { styles } from './src/style/styles';
-import { Login } from './components/auth/Login';
-import { Dashboard } from './components/dashboard/Dashboard';
 import { AuthLoadingScreen } from './components/auth/AuthLoadingScreen';
+import { CustomSplashScreen } from './components/auth/CustomSplashScreen';
+import { Login } from './components/auth/Login';
+import { Register } from './components/auth/Register';
+import { Dashboard } from './components/dashboard/Dashboard';
 import { Profile } from './components/profile/Profile';
 import { Settings } from './components/settings/Settings';
 import { Mylist } from './components/list/Mylist';
+import { AddListItem } from './components/list/AddListItem';
+import { MyNotifications } from './components/notification/MyNotifications';
+import { Menu } from './components/layout/Menu';
+
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+console.ignoredYellowBox = ['Setting a timer'];
 
 class Logout extends Component {
     constructor(props){
@@ -47,20 +58,7 @@ class MyHomeScreen extends React.Component {
   }
 }
 
-class MyNotificationsScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Notifications'
-  };
 
-  render() {
-    return (
-      <TouchableOpacity
-        onPress={() => this.props.navigation.goBack()}
-      ><Text> my notification </Text>
-      </TouchableOpacity>
-    );
-  }
-}
 
 const styless = StyleSheet.create({
   icon: {
@@ -72,36 +70,131 @@ const styless = StyleSheet.create({
 const BottomTab = createBottomTabNavigator({ 
     Settings: Settings,
     Home: MyHomeScreen,
-    Notifications: MyNotificationsScreen,
+    Notifications: MyNotifications,
+},{
+    tabBarOptions: {
+        activeTintColor: '#fff',
+        activeBackgroundColor:'#71b2f5',
+        inactiveTintColor: 'gray',
+        inactiveBackgroundColor:'white',
+        style: {
+            backgroundColor: '#fff',
+        },
+        indicatorStyle: {
+            backgroundColor: '#000',
+        },
+        labelStyle: {
+            fontSize: 15,
+            fontWeight:'bold',
+            textAlign:'center'
+        },
+    }
 });
+
+const Tabs = createMaterialTopTabNavigator({
+    Dashboard:Dashboard,
+  Profile:Profile,
+  Mylist:Mylist,
+},{
+    tabBarOptions: {
+        activeTintColor: '#000',
+        inactiveTintColor: 'gray',
+        style: {
+            backgroundColor: '#fff',
+        },
+        indicatorStyle: {
+            backgroundColor: '#000',
+        },
+    }
+});
+
+
+
+headerLeft=(navigation)=>()=>{
+    return <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+            <Icon name="menu" size={30} />
+        </TouchableOpacity>;
+}
+
+const DashboardStack = createStackNavigator({ 
+    Dashboard : {
+        screen: Dashboard,
+        navigationOptions: ({navigation}) => ({
+          title: "Main",
+          headerLeft:(headerLeft(navigation)
+          )
+        })
+    }
+});
+const stylesHeader = StyleSheet.create({
+  header: {
+    paddingTop: 10,
+    backgroundColor: '#e1e8ee',
+
+  },
+});
+
+const MylistStack = createStackNavigator({ 
+    Mylist : {
+        screen: Mylist,
+        navigationOptions: ({navigation}) => ({
+          
+            headerLeft:(headerLeft(navigation))
+        }),
+    },
+    AddListItem : {
+        screen: AddListItem,
+        /*navigationOptions: ({navigation}) => ({
+          
+            headerLeft:(headerLeft(navigation))
+        }),*/
+    }
+});
+
 
 const AppStack = createDrawerNavigator({
-    Dashboard: Dashboard,
-    Profile : Profile,
-    'My List' : Mylist,
-    Settings : BottomTab,
-    Logout :Logout
-    
-});
-
-
+    Dashboard:DashboardStack,
+    Profile:Profile,
+    Mylist:MylistStack,
+    Settings:BottomTab,
+    Logout:Logout
+}/*,{
+    initialRouteName: 'Dashboard',
+    contentComponent: Menu,
+    drawerWidth: 300
+}*/);
 
 const AuthStack = createStackNavigator({ 
-    Login: Login
+    Login: Login,
+    Register:Register
 });
+
+
 
 export default createSwitchNavigator(
     {
+        CustomSplashScreen:CustomSplashScreen,
         AuthLoading: AuthLoadingScreen,
         App: AppStack,
-        Auth: AuthStack, 
+        Auth: AuthStack
     }, 
     {
-        initialRouteName: 'AuthLoading',
+        initialRouteName: 'CustomSplashScreen',
     }
 );
 
-
+/*
+    const AppStack = createDrawerNavigator({
+        Dashboard:Dashboard,
+        Profile:Profile,
+        Mylist:Mylist,
+        Settings:BottomTab,
+    },{
+        initialRouteName: 'Dashboard',
+        contentComponent: Menu,
+        drawerWidth: 300
+    });
+*/
 {/*
     export default class App extends Component {
       constructor(props){

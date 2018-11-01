@@ -2,8 +2,6 @@ import { StyleSheet, StatusBar } from 'react-native';
 
 export const DashboardStyles = StyleSheet.create({
         logo:{
-            marginTop: 25,
-            marginLeft:60,
             alignItems:'center'
         },
         welcomeText:{

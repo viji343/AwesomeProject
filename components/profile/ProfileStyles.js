@@ -19,8 +19,8 @@ export const ProfileStyles = StyleSheet.create({
             backgroundColor: 'skyblue',
             padding: 20,
             position:'absolute',
-            marginLeft:120,
-            marginTop:-20,
+            //marginLeft:120,
+            //marginTop:-20,
             borderRadius:100,
             fontSize:20,
             color:'#FFFFFF'
