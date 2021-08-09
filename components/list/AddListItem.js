@@ -15,7 +15,7 @@ export class AddListItem extends Component {
 	}
 	submitItem(){
 		addItem(this.state.item);
-		Alert.alert('Item saved successfully');
+		Alert.alert('Item saved successfully!');
 		this.props.navigation.navigate('Mylist');
 	}
 
