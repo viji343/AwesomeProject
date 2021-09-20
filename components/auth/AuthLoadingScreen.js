@@ -12,7 +12,7 @@ import SplashScreen from 'react-native-splash-screen';
 
 export class AuthLoadingScreen extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); 
     this._bootstrapAsync();
   }
 
