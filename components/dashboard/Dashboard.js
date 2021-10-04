@@ -13,6 +13,7 @@ export class Dashboard extends Component{
             name: ''
         }
 
+        
     }
     async componentWillMount() {
         ToastAndroid.showWithGravityAndOffset(
