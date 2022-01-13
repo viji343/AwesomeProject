@@ -13,7 +13,7 @@ export class Dashboard extends Component{
             name: ''
         }
     }
-    
+
     async componentWillMount() {
         ToastAndroid.showWithGravityAndOffset(
           'Welcome!',
@@ -22,6 +22,7 @@ export class Dashboard extends Component{
           25,
           50
         );
+        
         /* Check storage if user was previously logged-in to the device */
         await AsyncStorage.getItem('user')
             .then(req => JSON.parse(req))
@@ -39,6 +40,7 @@ export class Dashboard extends Component{
             }
         );
     }
+
     render(){
         let pic = require('../../src/images/dummylogo.png');
         return(
