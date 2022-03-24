@@ -44,6 +44,9 @@ class Logout extends Component {
     }
 }
 
+
+//MyHomeScreen 
+
 class MyHomeScreen extends React.Component {
   static navigationOptions = {
     drawerLabel: 'Home'
