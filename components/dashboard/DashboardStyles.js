@@ -1,5 +1,5 @@
 import { StyleSheet, StatusBar } from 'react-native';
- //test 
+ //test 1
 export const DashboardStyles = StyleSheet.create({
         logo:{
             alignItems:'center'
