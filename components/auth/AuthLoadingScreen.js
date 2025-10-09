@@ -9,6 +9,7 @@ import {
 import { styles } from '../../src/style/styles';
 import SplashScreen from 'react-native-splash-screen';
 
+// Testing changes
 
 export class AuthLoadingScreen extends React.Component {
   constructor(props) {
