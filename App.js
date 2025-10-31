@@ -66,8 +66,8 @@ class MyHomeScreen extends React.Component {
 
 const styless = StyleSheet.create({
   icon: {
-    width: 24,
-    height: 24,
+    width: 54,
+    height: 54,
   },
 });
 
