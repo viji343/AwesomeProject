@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+
 let config = {
  	apiKey: "AIzaSyDYOjWS8QIxo_ree_SFWU3W9TDyVr8LtTM",
     authDomain: "reactnativesample-46645.firebaseapp.com",
